@@ -19,10 +19,10 @@ class Restaurant {
   List<RestaurantElement> restaurants;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
-    resultsFound: json["results_found"],
-    resultsStart: json["results_start"],
-    resultsShown: json["results_shown"],
-    restaurants: List<RestaurantElement>.from(json["restaurants"].map((x) => RestaurantElement.fromJson(x))),
+    resultsFound: json['results_found'],
+    resultsStart: json['results_start'],
+    resultsShown: json['results_shown'],
+    restaurants: List<RestaurantElement>.from(json['restaurants'].map((x) => RestaurantElement.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {

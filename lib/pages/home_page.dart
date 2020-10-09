@@ -10,8 +10,9 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String query;
-  ApiManager _manager = ApiManager();
+  final ApiManager _manager = ApiManager();
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -39,11 +40,11 @@ class _SearchPageState extends State<SearchPage> {
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
                             case ConnectionState.waiting:
-                              return new Text('loading...');
+                              return Text('loading...');
                             default:
-                              if (snapshot.hasError)
-                                return new Text('Error: ${snapshot.error}');
-                              else
+                              if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
                                 return ListView.builder(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
@@ -66,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                                                         Icons.ac_unit,
                                                         color: Colors.purple,
                                                       ),
-                                            title: new Text(
+                                            title: Text(
                                               data.restaurant.name,
                                               style: TextStyle(fontSize: 12),
                                             ),
@@ -76,6 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                                     );
                                   },
                                 );
+                              }
                           }
                         },
                       ),
