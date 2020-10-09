@@ -36,7 +36,9 @@ class _SearchPageState extends State<SearchPage> {
                       child: FutureBuilder<Restaurant>(
                         future: _manager.searchRestaurants(query),
                         builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
+                            (BuildContext context,  snapshot) {
+                              print('===>${snapshot
+                                  .data.restaurants.length}');
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
                             case ConnectionState.waiting:
@@ -45,13 +47,12 @@ class _SearchPageState extends State<SearchPage> {
                               if (snapshot.hasError)
                                 return new Text('Error: ${snapshot.error}');
                               else
-                                print(snapshot
-                                    .data.restaurants[2].restaurant.name
-                                    .toString());
+
                               return ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: 20,
+                                itemCount: snapshot
+                                    .data.restaurants.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   var data = snapshot.data.restaurants[index];
                                   return Column(
