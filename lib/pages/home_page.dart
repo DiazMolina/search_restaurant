@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:restaurant_search_app/models/models.dart';
 import 'package:restaurant_search_app/services/services.dart';
@@ -35,10 +34,8 @@ class _SearchPageState extends State<SearchPage> {
                   : Expanded(
                       child: FutureBuilder<Restaurant>(
                         future: _manager.searchRestaurants(query),
-                        builder:
-                            (BuildContext context,  snapshot) {
-                              print('===>${snapshot
-                                  .data.restaurants.length}');
+                        builder: (BuildContext context, snapshot) {
+                          print('===>${snapshot.data.restaurants.length}');
                           switch (snapshot.connectionState) {
                             case ConnectionState.none:
                             case ConnectionState.waiting:
@@ -47,36 +44,38 @@ class _SearchPageState extends State<SearchPage> {
                               if (snapshot.hasError)
                                 return new Text('Error: ${snapshot.error}');
                               else
-
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: snapshot
-                                    .data.restaurants.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  var data = snapshot.data.restaurants[index];
-                                  return Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ListTile(
-                                          leading: data.restaurant.thumb != null &&
-                                                  data.restaurant.thumb.isNotEmpty
-                                              ? Image.network(data.restaurant.thumb)
-                                              : Icon(
-                                                  Icons.ac_unit,
-                                                  color: Colors.purple,
-                                                ),
-                                          title: new Text(
-                                            data.restaurant.name,
-                                            style: TextStyle(fontSize: 12),
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: snapshot.data.restaurants.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var data = snapshot.data.restaurants[index];
+                                    return Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ListTile(
+                                            leading:
+                                                data.restaurant.thumb != null &&
+                                                        data.restaurant.thumb
+                                                            .isNotEmpty
+                                                    ? Image.network(
+                                                        data.restaurant.thumb)
+                                                    : Icon(
+                                                        Icons.ac_unit,
+                                                        color: Colors.purple,
+                                                      ),
+                                            title: new Text(
+                                              data.restaurant.name,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                                      ],
+                                    );
+                                  },
+                                );
                           }
                         },
                       ),
